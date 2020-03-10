@@ -1,0 +1,149 @@
+
+body {
+    font: 13px Arial, Verdana, Sans-Serif;
+    margin: 0;
+    width: auto;
+}
+
+h1 {
+    margin: 10px;
+}
+
+#footer > p {
+    margin: 4px;
+}
+
+.error {
+    background-color: #ffb7b7;
+}
+
+.error2 {
+    background-color: #faa;
+    border: 1px dotted black;
+    display: inline-block;
+    margin-left: 4px;
+}
+
+.inconclusive {
+    background-color: #B6B6B4;
+}
+
+.inconclusive2 {
+    background-color: #B6B6B4;
+    border: 1px dotted black;
+    display: inline-block;
+    margin-left: 4px;
+}
+
+div.verbose {
+    display: inline-block;
+    vertical-align: top;
+    cursor: help;
+}
+
+div.verbose div.content {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    margin: 4px;
+    max-width: 40%;
+    white-space: pre-wrap;
+    border: 1px solid black;
+    background-color: #FFFFCC;
+    cursor: auto;
+}
+
+.highlight .hll {
+    padding: 1px;
+}
+
+#header {
+    border-bottom: thin solid #aaa;
+}
+
+#menu {
+    float: left;
+    margin-top: 5px;
+    text-align: left;
+    width: 150px;
+    /*height: 75%;*/
+    position: fixed;
+    overflow: auto;
+    z-index: 1;
+}
+
+#menu_index {
+    float: left;
+    margin-top: 5px;
+    padding-left: 5px;
+    text-align: left;
+    width: 300px;
+    /*height: 75%;*/
+    position: fixed;
+    overflow: auto;
+    z-index: 1;
+}
+
+#menu > a {
+    display: block;
+    margin-left: 10px;
+    font: 12px;
+    z-index: 1;
+}
+
+#filename  {
+    margin-left: 10px;
+    font: 12px;
+    z-index: 1;
+}
+
+.highlighttable {
+    background-color:white;
+    z-index: 10;
+    position: relative;
+    margin: -10 px;
+}
+
+#content {
+    background-color: white;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    float: left;
+    margin: 5px;
+    margin-left: 10px;
+    padding: 0 10px 10px 10px;
+    width: 80%;
+    padding-left: 150px;
+}
+
+#content_index {
+    background-color: white;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    float: left;
+    margin: 5px;
+    margin-left: 10px;
+    padding: 0 10px 10px 10px;
+    width: 80%;
+    padding-left: 300px;
+}
+
+.linenos {
+    border-right: thin solid #aaa;
+    color: lightgray;
+    padding-right: 6px;
+}
+
+#footer {
+    border-top: thin solid #aaa;
+    clear: both;
+    font-size: 90%;
+    margin-top: 5px;
+}
+
+#footer ul {
+    list-style-type: none;
+    padding-left: 0;
+}

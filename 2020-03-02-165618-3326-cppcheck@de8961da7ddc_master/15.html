@@ -1,0 +1,1490 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cppcheck - HTML report - mate-terminal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #ffffff; }
+.highlight .c { color: #888888 } /* Comment */
+.highlight .err { color: #FF0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #008800; font-weight: bold } /* Keyword */
+.highlight .o { color: #333333 } /* Operator */
+.highlight .ch { color: #888888 } /* Comment.Hashbang */
+.highlight .cm { color: #888888 } /* Comment.Multiline */
+.highlight .cp { color: #557799 } /* Comment.Preproc */
+.highlight .cpf { color: #888888 } /* Comment.PreprocFile */
+.highlight .c1 { color: #888888 } /* Comment.Single */
+.highlight .cs { color: #cc0000; font-weight: bold } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #003388; font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #333399; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #6600EE; font-weight: bold } /* Literal.Number */
+.highlight .s { background-color: #fff0f0 } /* Literal.String */
+.highlight .na { color: #0000CC } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #BB0066; font-weight: bold } /* Name.Class */
+.highlight .no { color: #003366; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #880000; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #FF0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0066BB; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #997700; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #007700 } /* Name.Tag */
+.highlight .nv { color: #996633 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #6600EE; font-weight: bold } /* Literal.Number.Bin */
+.highlight .mf { color: #6600EE; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #005588; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #4400EE; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sa { background-color: #fff0f0 } /* Literal.String.Affix */
+.highlight .sb { background-color: #fff0f0 } /* Literal.String.Backtick */
+.highlight .sc { color: #0044DD } /* Literal.String.Char */
+.highlight .dl { background-color: #fff0f0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #DD4422 } /* Literal.String.Doc */
+.highlight .s2 { background-color: #fff0f0 } /* Literal.String.Double */
+.highlight .se { color: #666666; font-weight: bold; background-color: #fff0f0 } /* Literal.String.Escape */
+.highlight .sh { background-color: #fff0f0 } /* Literal.String.Heredoc */
+.highlight .si { background-color: #eeeeee } /* Literal.String.Interpol */
+.highlight .sx { color: #DD2200; background-color: #fff0f0 } /* Literal.String.Other */
+.highlight .sr { color: #000000; background-color: #fff0ff } /* Literal.String.Regex */
+.highlight .s1 { background-color: #fff0f0 } /* Literal.String.Single */
+.highlight .ss { color: #AA6600 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0066BB; font-weight: bold } /* Name.Function.Magic */
+.highlight .vc { color: #336699 } /* Name.Variable.Class */
+.highlight .vg { color: #dd7700; font-weight: bold } /* Name.Variable.Global */
+.highlight .vi { color: #3333BB } /* Name.Variable.Instance */
+.highlight .vm { color: #996633 } /* Name.Variable.Magic */
+.highlight .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
+    </style>
+    <script language="javascript">
+      function getStyle(el,styleProp) {
+        if (el.currentStyle)
+          var y = el.currentStyle[styleProp];
+        else if (window.getComputedStyle)
+          var y = document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
+        return y;
+      }
+      function toggle() {
+        var el = this.expandable_content;
+        var mark = this.expandable_marker;
+        if (el.style.display == "block") {
+          el.style.display = "none";
+          mark.innerHTML = "[+]";
+        } else {
+          el.style.display = "block";
+          mark.innerHTML = "[-]";
+        }
+      }
+      function init_expandables() {
+        var elts = document.getElementsByClassName("expandable");
+        for (var i = 0; i < elts.length; i++) {
+          var el = elts[i];
+          var clickable = el.getElementsByTagName("span")[0];
+          var marker = clickable.getElementsByClassName("marker")[0];
+          var content = el.getElementsByClassName("content")[0];
+          var width = clickable.clientWidth - parseInt(getStyle(content, "padding-left")) - parseInt(getStyle(content, "padding-right"));
+          content.style.width = width + "px";
+          clickable.expandable_content = content;
+          clickable.expandable_marker = marker;
+          clickable.onclick = toggle;
+        }
+      }
+      function set_class_display(c, st) {
+        var elements = document.querySelectorAll('.' + c),
+            len = elements.length;
+        for (i = 0; i < len; i++) {
+            elements[i].style.display = st;
+        }
+      }
+      function toggle_class_visibility(id) {
+        var box = document.getElementById(id);
+        set_class_display(id, box.checked ? '' : 'none');
+      }
+      function toggle_all(){
+        var elts = document.getElementsByTagName("input");
+        for (var i = 1; i < elts.length; i++) {           
+          var el = elts[i];
+          el.checked ? el.checked=false : el.checked=true;
+          toggle_class_visibility(el.id);        
+        }            
+      }
+
+    </script>
+  </head>
+  <body onload="init_expandables()">
+      <div id="header">
+        <h1>Cppcheck report - mate-terminal: src/terminal.c </h1>
+      </div>
+      <div id="menu" dir="rtl">
+       <p id="filename"><a href="index.html">Defects:</a> terminal.c</p>
+<a href='15.html#line-254'> nullPointerRedundantCheck 254</a><a href='15.html#line-255'> nullPointerRedundantCheck 255</a><a href='15.html#line-259'> nullPointerRedundantCheck 259</a>
+      </div>
+      <div id="content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668</pre></div></td><td class="code"><div class="highlight"><pre><span></span><a name="line-1"></a><span class="cm">/*</span>
+<a name="line-2"></a><span class="cm"> * Copyright © 2001, 2002 Havoc Pennington</span>
+<a name="line-3"></a><span class="cm"> * Copyright © 2002 Red Hat, Inc.</span>
+<a name="line-4"></a><span class="cm"> * Copyright © 2002 Sun Microsystems</span>
+<a name="line-5"></a><span class="cm"> * Copyright © 2003 Mariano Suarez-Alvarez</span>
+<a name="line-6"></a><span class="cm"> * Copyright © 2008, 2010 Christian Persch</span>
+<a name="line-7"></a><span class="cm"> *</span>
+<a name="line-8"></a><span class="cm"> * Mate-terminal is free software; you can redistribute it and/or modify</span>
+<a name="line-9"></a><span class="cm"> * it under the terms of the GNU General Public License as published by</span>
+<a name="line-10"></a><span class="cm"> * the Free Software Foundation; either version 3 of the License, or</span>
+<a name="line-11"></a><span class="cm"> * (at your option) any later version.</span>
+<a name="line-12"></a><span class="cm"> *</span>
+<a name="line-13"></a><span class="cm"> * Mate-terminal is distributed in the hope that it will be useful,</span>
+<a name="line-14"></a><span class="cm"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="line-15"></a><span class="cm"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<a name="line-16"></a><span class="cm"> * GNU General Public License for more details.</span>
+<a name="line-17"></a><span class="cm"> *</span>
+<a name="line-18"></a><span class="cm"> * You should have received a copy of the GNU General Public License</span>
+<a name="line-19"></a><span class="cm"> * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="line-20"></a><span class="cm"> */</span>
+<a name="line-21"></a>
+<a name="line-22"></a><span class="cp">#include</span> <span class="cpf">&lt;config.h&gt;</span><span class="cp"></span>
+<a name="line-23"></a>
+<a name="line-24"></a><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp"></span>
+<a name="line-25"></a><span class="cp">#include</span> <span class="cpf">&lt;locale.h&gt;</span><span class="cp"></span>
+<a name="line-26"></a><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<a name="line-27"></a><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp"></span>
+<a name="line-28"></a><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<a name="line-29"></a>
+<a name="line-30"></a><span class="cp">#include</span> <span class="cpf">&lt;glib.h&gt;</span><span class="cp"></span>
+<a name="line-31"></a><span class="cp">#include</span> <span class="cpf">&lt;glib/gstdio.h&gt;</span><span class="cp"></span>
+<a name="line-32"></a><span class="cp">#include</span> <span class="cpf">&lt;gio/gio.h&gt;</span><span class="cp"></span>
+<a name="line-33"></a>
+<a name="line-34"></a><span class="cp">#include</span> <span class="cpf">&lt;gdk/gdk.h&gt;</span><span class="cp"></span>
+<a name="line-35"></a><span class="cp">#include</span> <span class="cpf">&lt;gdk/gdkx.h&gt;</span><span class="cp"></span>
+<a name="line-36"></a>
+<a name="line-37"></a><span class="cp">#include</span> <span class="cpf">&quot;eggsmclient.h&quot;</span><span class="cp"></span>
+<a name="line-38"></a>
+<a name="line-39"></a><span class="cp">#include</span> <span class="cpf">&quot;terminal-accels.h&quot;</span><span class="cp"></span>
+<a name="line-40"></a><span class="cp">#include</span> <span class="cpf">&quot;terminal-app.h&quot;</span><span class="cp"></span>
+<a name="line-41"></a><span class="cp">#include</span> <span class="cpf">&quot;terminal-debug.h&quot;</span><span class="cp"></span>
+<a name="line-42"></a><span class="cp">#include</span> <span class="cpf">&quot;terminal-intl.h&quot;</span><span class="cp"></span>
+<a name="line-43"></a><span class="cp">#include</span> <span class="cpf">&quot;terminal-options.h&quot;</span><span class="cp"></span>
+<a name="line-44"></a><span class="cp">#include</span> <span class="cpf">&quot;terminal-util.h&quot;</span><span class="cp"></span>
+<a name="line-45"></a>
+<a name="line-46"></a><span class="cp">#define TERMINAL_FACTORY_SERVICE_NAME_PREFIX  &quot;org.mate.Terminal.Display&quot;</span>
+<a name="line-47"></a><span class="cp">#define TERMINAL_FACTORY_SERVICE_PATH         &quot;/org/mate/Terminal/Factory&quot;</span>
+<a name="line-48"></a><span class="cp">#define TERMINAL_FACTORY_INTERFACE_NAME       &quot;org.mate.Terminal.Factory&quot;</span>
+<a name="line-49"></a>
+<a name="line-50"></a><span class="k">static</span> <span class="kt">char</span> <span class="o">*</span>
+<a name="line-51"></a><span class="nf">ay_to_string</span> <span class="p">(</span><span class="n">GVariant</span> <span class="o">*</span><span class="n">variant</span><span class="p">,</span>
+<a name="line-52"></a>              <span class="n">GError</span> <span class="o">**</span><span class="n">error</span><span class="p">)</span>
+<a name="line-53"></a><span class="p">{</span>
+<a name="line-54"></a>	<span class="n">gsize</span> <span class="n">len</span><span class="p">;</span>
+<a name="line-55"></a>	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+<a name="line-56"></a>
+<a name="line-57"></a>	<span class="n">data</span> <span class="o">=</span> <span class="n">g_variant_get_fixed_array</span> <span class="p">(</span><span class="n">variant</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">len</span><span class="p">,</span> <span class="k">sizeof</span> <span class="p">(</span><span class="kt">char</span><span class="p">));</span>
+<a name="line-58"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<a name="line-59"></a>		<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-60"></a>
+<a name="line-61"></a>	<span class="cm">/* Make sure there are no embedded NULs */</span>
+<a name="line-62"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">memchr</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">,</span> <span class="n">len</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-63"></a>	<span class="p">{</span>
+<a name="line-64"></a>		<span class="n">g_set_error_literal</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">G_DBUS_ERROR</span><span class="p">,</span> <span class="n">G_DBUS_ERROR_INVALID_ARGS</span><span class="p">,</span>
+<a name="line-65"></a>		                     <span class="s">&quot;String is shorter than claimed&quot;</span><span class="p">);</span>
+<a name="line-66"></a>		<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-67"></a>	<span class="p">}</span>
+<a name="line-68"></a>
+<a name="line-69"></a>	<span class="k">return</span> <span class="n">g_strndup</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+<a name="line-70"></a><span class="p">}</span>
+<a name="line-71"></a>
+<a name="line-72"></a><span class="k">static</span> <span class="kt">char</span> <span class="o">**</span>
+<a name="line-73"></a><span class="nf">ay_to_strv</span> <span class="p">(</span><span class="n">GVariant</span> <span class="o">*</span><span class="n">variant</span><span class="p">,</span>
+<a name="line-74"></a>            <span class="kt">int</span> <span class="o">*</span><span class="n">argc</span><span class="p">)</span>
+<a name="line-75"></a><span class="p">{</span>
+<a name="line-76"></a>	<span class="n">GPtrArray</span> <span class="o">*</span><span class="n">argv</span><span class="p">;</span>
+<a name="line-77"></a>	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="o">*</span><span class="n">nullbyte</span><span class="p">;</span>
+<a name="line-78"></a>	<span class="n">gsize</span> <span class="n">data_len</span><span class="p">;</span>
+<a name="line-79"></a>	<span class="n">gssize</span> <span class="n">len</span><span class="p">;</span>
+<a name="line-80"></a>
+<a name="line-81"></a>	<span class="n">data</span> <span class="o">=</span> <span class="n">g_variant_get_fixed_array</span> <span class="p">(</span><span class="n">variant</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">data_len</span><span class="p">,</span> <span class="k">sizeof</span> <span class="p">(</span><span class="kt">char</span><span class="p">));</span>
+<a name="line-82"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">data_len</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">data_len</span> <span class="o">&gt;</span> <span class="n">G_MAXSSIZE</span><span class="p">)</span>
+<a name="line-83"></a>	<span class="p">{</span>
+<a name="line-84"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-85"></a>			<span class="o">*</span><span class="n">argc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="line-86"></a>		<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-87"></a>	<span class="p">}</span>
+<a name="line-88"></a>
+<a name="line-89"></a>	<span class="n">argv</span> <span class="o">=</span> <span class="n">g_ptr_array_new</span> <span class="p">();</span>
+<a name="line-90"></a>
+<a name="line-91"></a>	<span class="n">len</span> <span class="o">=</span> <span class="n">data_len</span><span class="p">;</span>
+<a name="line-92"></a>	<span class="k">do</span>
+<a name="line-93"></a>	<span class="p">{</span>
+<a name="line-94"></a>		<span class="n">gssize</span> <span class="n">string_len</span><span class="p">;</span>
+<a name="line-95"></a>
+<a name="line-96"></a>		<span class="n">nullbyte</span> <span class="o">=</span> <span class="n">memchr</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+<a name="line-97"></a>
+<a name="line-98"></a>		<span class="n">string_len</span> <span class="o">=</span> <span class="n">nullbyte</span> <span class="o">?</span> <span class="p">(</span><span class="n">gssize</span><span class="p">)</span> <span class="p">(</span><span class="n">nullbyte</span> <span class="o">-</span> <span class="n">data</span><span class="p">)</span> <span class="o">:</span> <span class="n">len</span><span class="p">;</span>
+<a name="line-99"></a>		<span class="n">g_ptr_array_add</span> <span class="p">(</span><span class="n">argv</span><span class="p">,</span> <span class="n">g_strndup</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">string_len</span><span class="p">));</span>
+<a name="line-100"></a>
+<a name="line-101"></a>		<span class="n">len</span> <span class="o">-=</span> <span class="n">string_len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<a name="line-102"></a>		<span class="n">data</span> <span class="o">+=</span> <span class="n">string_len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<a name="line-103"></a>	<span class="p">}</span>
+<a name="line-104"></a>	<span class="k">while</span> <span class="p">(</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+<a name="line-105"></a>
+<a name="line-106"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">argc</span><span class="p">)</span>
+<a name="line-107"></a>		<span class="o">*</span><span class="n">argc</span> <span class="o">=</span> <span class="n">argv</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span>
+<a name="line-108"></a>
+<a name="line-109"></a>	<span class="cm">/* NULL terminate */</span>
+<a name="line-110"></a>	<span class="n">g_ptr_array_add</span> <span class="p">(</span><span class="n">argv</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<a name="line-111"></a>	<span class="k">return</span> <span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="p">)</span> <span class="n">g_ptr_array_free</span> <span class="p">(</span><span class="n">argv</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">);</span>
+<a name="line-112"></a><span class="p">}</span>
+<a name="line-113"></a>
+<a name="line-114"></a><span class="k">static</span> <span class="n">GVariant</span> <span class="o">*</span>
+<a name="line-115"></a><span class="nf">string_to_ay</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">string</span><span class="p">)</span>
+<a name="line-116"></a><span class="p">{</span>
+<a name="line-117"></a>	<span class="n">gsize</span> <span class="n">len</span><span class="p">;</span>
+<a name="line-118"></a>	<span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+<a name="line-119"></a>
+<a name="line-120"></a>	<span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span> <span class="p">(</span><span class="n">string</span><span class="p">);</span>
+<a name="line-121"></a>	<span class="n">data</span> <span class="o">=</span> <span class="n">g_strndup</span> <span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+<a name="line-122"></a>
+<a name="line-123"></a>	<span class="k">return</span> <span class="n">g_variant_new_from_data</span> <span class="p">(</span><span class="n">G_VARIANT_TYPE</span> <span class="p">(</span><span class="s">&quot;ay&quot;</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">,</span> <span class="n">g_free</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+<a name="line-124"></a><span class="p">}</span>
+<a name="line-125"></a>
+<a name="line-126"></a><span class="k">typedef</span> <span class="k">struct</span>
+<a name="line-127"></a><span class="p">{</span>
+<a name="line-128"></a>	<span class="kt">char</span> <span class="o">*</span><span class="n">factory_name</span><span class="p">;</span>
+<a name="line-129"></a>	<span class="n">TerminalOptions</span> <span class="o">*</span><span class="n">options</span><span class="p">;</span>
+<a name="line-130"></a>	<span class="kt">int</span> <span class="n">exit_code</span><span class="p">;</span>
+<a name="line-131"></a>	<span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">;</span>
+<a name="line-132"></a>	<span class="kt">int</span> <span class="n">argc</span><span class="p">;</span>
+<a name="line-133"></a><span class="p">}</span> <span class="n">OwnData</span><span class="p">;</span>
+<a name="line-134"></a>
+<a name="line-135"></a><span class="k">static</span> <span class="kt">void</span>
+<a name="line-136"></a><span class="nf">method_call_cb</span> <span class="p">(</span><span class="n">GDBusConnection</span> <span class="o">*</span><span class="n">connection</span><span class="p">,</span>
+<a name="line-137"></a>                <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sender</span><span class="p">,</span>
+<a name="line-138"></a>                <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">object_path</span><span class="p">,</span>
+<a name="line-139"></a>                <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">interface_name</span><span class="p">,</span>
+<a name="line-140"></a>                <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">method_name</span><span class="p">,</span>
+<a name="line-141"></a>                <span class="n">GVariant</span> <span class="o">*</span><span class="n">parameters</span><span class="p">,</span>
+<a name="line-142"></a>                <span class="n">GDBusMethodInvocation</span> <span class="o">*</span><span class="n">invocation</span><span class="p">,</span>
+<a name="line-143"></a>                <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">)</span>
+<a name="line-144"></a><span class="p">{</span>
+<a name="line-145"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">g_strcmp0</span> <span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="s">&quot;HandleArguments&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<a name="line-146"></a>	<span class="p">{</span>
+<a name="line-147"></a>		<span class="n">TerminalOptions</span> <span class="o">*</span><span class="n">options</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-148"></a>		<span class="n">GVariant</span> <span class="o">*</span><span class="n">v_wd</span><span class="p">,</span> <span class="o">*</span><span class="n">v_display</span><span class="p">,</span> <span class="o">*</span><span class="n">v_sid</span><span class="p">,</span> <span class="o">*</span><span class="n">v_envv</span><span class="p">,</span> <span class="o">*</span><span class="n">v_argv</span><span class="p">;</span>
+<a name="line-149"></a>		<span class="kt">char</span> <span class="o">*</span><span class="n">working_directory</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">*</span><span class="n">display_name</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">*</span><span class="n">startup_id</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-150"></a>		<span class="kt">int</span> <span class="n">initial_workspace</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a name="line-151"></a>		<span class="kt">char</span> <span class="o">**</span><span class="n">envv</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">**</span><span class="n">argv</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-152"></a>		<span class="kt">int</span> <span class="n">argc</span><span class="p">;</span>
+<a name="line-153"></a>		<span class="n">GError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-154"></a>
+<a name="line-155"></a>		<span class="n">g_variant_get</span> <span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="s">&quot;(@ay@ay@ay@ayi@ay)&quot;</span><span class="p">,</span>
+<a name="line-156"></a>		               <span class="o">&amp;</span><span class="n">v_wd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v_display</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v_sid</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v_envv</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">initial_workspace</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v_argv</span><span class="p">);</span>
+<a name="line-157"></a>
+<a name="line-158"></a>		<span class="n">working_directory</span> <span class="o">=</span> <span class="n">ay_to_string</span> <span class="p">(</span><span class="n">v_wd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">);</span>
+<a name="line-159"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<a name="line-160"></a>			<span class="k">goto</span> <span class="n">out</span><span class="p">;</span>
+<a name="line-161"></a>		<span class="n">display_name</span> <span class="o">=</span> <span class="n">ay_to_string</span> <span class="p">(</span><span class="n">v_display</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">);</span>
+<a name="line-162"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<a name="line-163"></a>			<span class="k">goto</span> <span class="n">out</span><span class="p">;</span>
+<a name="line-164"></a>		<span class="n">startup_id</span> <span class="o">=</span> <span class="n">ay_to_string</span> <span class="p">(</span><span class="n">v_sid</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">);</span>
+<a name="line-165"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<a name="line-166"></a>			<span class="k">goto</span> <span class="n">out</span><span class="p">;</span>
+<a name="line-167"></a>		<span class="n">envv</span> <span class="o">=</span> <span class="n">ay_to_strv</span> <span class="p">(</span><span class="n">v_envv</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<a name="line-168"></a>		<span class="n">argv</span> <span class="o">=</span> <span class="n">ay_to_strv</span> <span class="p">(</span><span class="n">v_argv</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argc</span><span class="p">);</span>
+<a name="line-169"></a>
+<a name="line-170"></a>		<span class="n">_terminal_debug_print</span> <span class="p">(</span><span class="n">TERMINAL_DEBUG_FACTORY</span><span class="p">,</span>
+<a name="line-171"></a>		                       <span class="s">&quot;Factory invoked with working-dir=&#39;%s&#39; display=&#39;%s&#39; startup-id=&#39;%s&#39;&quot;</span>
+<a name="line-172"></a>		                       <span class="s">&quot;workspace=&#39;%d&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<a name="line-173"></a>		                       <span class="n">working_directory</span> <span class="o">?</span> <span class="nl">working_directory</span> <span class="p">:</span> <span class="s">&quot;(null)&quot;</span><span class="p">,</span>
+<a name="line-174"></a>		                       <span class="n">display_name</span> <span class="o">?</span> <span class="nl">display_name</span> <span class="p">:</span> <span class="s">&quot;(null)&quot;</span><span class="p">,</span>
+<a name="line-175"></a>		                       <span class="n">startup_id</span> <span class="o">?</span> <span class="nl">startup_id</span> <span class="p">:</span> <span class="s">&quot;(null)&quot;</span><span class="p">,</span>
+<a name="line-176"></a>		                       <span class="n">initial_workspace</span><span class="p">);</span>
+<a name="line-177"></a>
+<a name="line-178"></a>		<span class="n">options</span> <span class="o">=</span> <span class="n">terminal_options_parse</span> <span class="p">(</span><span class="n">working_directory</span><span class="p">,</span>
+<a name="line-179"></a>		                                  <span class="n">display_name</span><span class="p">,</span>
+<a name="line-180"></a>		                                  <span class="n">startup_id</span><span class="p">,</span>
+<a name="line-181"></a>		                                  <span class="n">envv</span><span class="p">,</span>
+<a name="line-182"></a>		                                  <span class="n">TRUE</span><span class="p">,</span>
+<a name="line-183"></a>		                                  <span class="n">TRUE</span><span class="p">,</span>
+<a name="line-184"></a>		                                  <span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span><span class="p">,</span>
+<a name="line-185"></a>		                                  <span class="o">&amp;</span><span class="n">error</span><span class="p">,</span>
+<a name="line-186"></a>		                                  <span class="nb">NULL</span><span class="p">);</span>
+<a name="line-187"></a>
+<a name="line-188"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">options</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-189"></a>		<span class="p">{</span>
+<a name="line-190"></a>			<span class="n">options</span><span class="o">-&gt;</span><span class="n">initial_workspace</span> <span class="o">=</span> <span class="n">initial_workspace</span><span class="p">;</span>
+<a name="line-191"></a>
+<a name="line-192"></a>			<span class="n">terminal_app_handle_options</span> <span class="p">(</span><span class="n">terminal_app_get</span> <span class="p">(),</span> <span class="n">options</span><span class="p">,</span> <span class="n">FALSE</span> <span class="cm">/* no resume */</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">);</span>
+<a name="line-193"></a>			<span class="n">terminal_options_free</span> <span class="p">(</span><span class="n">options</span><span class="p">);</span>
+<a name="line-194"></a>		<span class="p">}</span>
+<a name="line-195"></a>
+<a name="line-196"></a><span class="nl">out</span><span class="p">:</span>
+<a name="line-197"></a>		<span class="n">g_variant_unref</span> <span class="p">(</span><span class="n">v_wd</span><span class="p">);</span>
+<a name="line-198"></a>		<span class="n">g_free</span> <span class="p">(</span><span class="n">working_directory</span><span class="p">);</span>
+<a name="line-199"></a>		<span class="n">g_variant_unref</span> <span class="p">(</span><span class="n">v_display</span><span class="p">);</span>
+<a name="line-200"></a>		<span class="n">g_free</span> <span class="p">(</span><span class="n">display_name</span><span class="p">);</span>
+<a name="line-201"></a>		<span class="n">g_variant_unref</span> <span class="p">(</span><span class="n">v_sid</span><span class="p">);</span>
+<a name="line-202"></a>		<span class="n">g_free</span> <span class="p">(</span><span class="n">startup_id</span><span class="p">);</span>
+<a name="line-203"></a>		<span class="n">g_variant_unref</span> <span class="p">(</span><span class="n">v_envv</span><span class="p">);</span>
+<a name="line-204"></a>		<span class="n">g_strfreev</span> <span class="p">(</span><span class="n">envv</span><span class="p">);</span>
+<a name="line-205"></a>		<span class="n">g_variant_unref</span> <span class="p">(</span><span class="n">v_argv</span><span class="p">);</span>
+<a name="line-206"></a>		<span class="n">g_strfreev</span> <span class="p">(</span><span class="n">argv</span><span class="p">);</span>
+<a name="line-207"></a>
+<a name="line-208"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-209"></a>		<span class="p">{</span>
+<a name="line-210"></a>			<span class="n">g_dbus_method_invocation_return_value</span> <span class="p">(</span><span class="n">invocation</span><span class="p">,</span> <span class="n">g_variant_new</span> <span class="p">(</span><span class="s">&quot;()&quot;</span><span class="p">));</span>
+<a name="line-211"></a>		<span class="p">}</span>
+<a name="line-212"></a>		<span class="k">else</span>
+<a name="line-213"></a>		<span class="p">{</span>
+<a name="line-214"></a>			<span class="n">g_dbus_method_invocation_return_gerror</span> <span class="p">(</span><span class="n">invocation</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+<a name="line-215"></a>			<span class="n">g_error_free</span> <span class="p">(</span><span class="n">error</span><span class="p">);</span>
+<a name="line-216"></a>		<span class="p">}</span>
+<a name="line-217"></a>	<span class="p">}</span>
+<a name="line-218"></a><span class="p">}</span>
+<a name="line-219"></a>
+<a name="line-220"></a><span class="k">static</span> <span class="kt">void</span>
+<a name="line-221"></a><span class="nf">bus_acquired_cb</span> <span class="p">(</span><span class="n">GDBusConnection</span> <span class="o">*</span><span class="n">connection</span><span class="p">,</span>
+<a name="line-222"></a>                 <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span>
+<a name="line-223"></a>                 <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">)</span>
+<a name="line-224"></a><span class="p">{</span>
+<a name="line-225"></a>	<span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">dbus_introspection_xml</span><span class="p">[]</span> <span class="o">=</span>
+<a name="line-226"></a>	    <span class="s">&quot;&lt;node name=&#39;/org/mate/Terminal&#39;&gt;&quot;</span>
+<a name="line-227"></a>	    <span class="s">&quot;&lt;interface name=&#39;org.mate.Terminal.Factory&#39;&gt;&quot;</span>
+<a name="line-228"></a>	    <span class="s">&quot;&lt;method name=&#39;HandleArguments&#39;&gt;&quot;</span>
+<a name="line-229"></a>	    <span class="s">&quot;&lt;arg type=&#39;ay&#39; name=&#39;working_directory&#39; direction=&#39;in&#39; /&gt;&quot;</span>
+<a name="line-230"></a>	    <span class="s">&quot;&lt;arg type=&#39;ay&#39; name=&#39;display_name&#39; direction=&#39;in&#39; /&gt;&quot;</span>
+<a name="line-231"></a>	    <span class="s">&quot;&lt;arg type=&#39;ay&#39; name=&#39;startup_id&#39; direction=&#39;in&#39; /&gt;&quot;</span>
+<a name="line-232"></a>	    <span class="s">&quot;&lt;arg type=&#39;ay&#39; name=&#39;environment&#39; direction=&#39;in&#39; /&gt;&quot;</span>
+<a name="line-233"></a>	    <span class="s">&quot;&lt;arg type=&#39;i&#39; name=&#39;workspace&#39; direction=&#39;in&#39; /&gt;&quot;</span>
+<a name="line-234"></a>	    <span class="s">&quot;&lt;arg type=&#39;ay&#39; name=&#39;arguments&#39; direction=&#39;in&#39; /&gt;&quot;</span>
+<a name="line-235"></a>	    <span class="s">&quot;&lt;/method&gt;&quot;</span>
+<a name="line-236"></a>	    <span class="s">&quot;&lt;/interface&gt;&quot;</span>
+<a name="line-237"></a>	    <span class="s">&quot;&lt;/node&gt;&quot;</span><span class="p">;</span>
+<a name="line-238"></a>
+<a name="line-239"></a>	<span class="k">static</span> <span class="k">const</span> <span class="n">GDBusInterfaceVTable</span> <span class="n">interface_vtable</span> <span class="o">=</span>
+<a name="line-240"></a>	<span class="p">{</span>
+<a name="line-241"></a>		<span class="n">method_call_cb</span><span class="p">,</span>
+<a name="line-242"></a>		<span class="nb">NULL</span><span class="p">,</span>
+<a name="line-243"></a>		<span class="nb">NULL</span><span class="p">,</span>
+<a name="line-244"></a>	<span class="p">};</span>
+<a name="line-245"></a>
+<a name="line-246"></a>	<span class="n">OwnData</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">OwnData</span> <span class="o">*</span><span class="p">)</span> <span class="n">user_data</span><span class="p">;</span>
+<a name="line-247"></a>	<span class="n">GDBusNodeInfo</span> <span class="o">*</span><span class="n">introspection_data</span><span class="p">;</span>
+<a name="line-248"></a>	<span class="n">guint</span> <span class="n">registration_id</span><span class="p">;</span>
+<a name="line-249"></a>	<span class="n">GError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-250"></a>
+<a name="line-251"></a>	<span class="n">_terminal_debug_print</span> <span class="p">(</span><span class="n">TERMINAL_DEBUG_FACTORY</span><span class="p">,</span>
+<a name="line-252"></a>	                       <span class="s">&quot;Bus %s acquired</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+<a name="line-253"></a>
+<a name="line-254"></a><span class="hll">	<span class="n">introspection_data</span> <span class="o">=</span> <span class="n">g_dbus_node_info_new_for_xml</span> <span class="p">(</span><span class="n">dbus_introspection_xml</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span><span class='error2'>&lt;--- Assignment 'introspection_data=g_dbus_node_info_new_for_xml(dbus_introspection_xml,NULL)', assigned value is 0</span>
+</span><a name="line-255"></a><span class="hll">	<span class="n">g_assert</span> <span class="p">(</span><span class="n">introspection_data</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span><span class='error2'>&lt;--- Assuming that condition 'introspection_data!=NULL' is not redundant</span>
+</span><a name="line-256"></a>
+<a name="line-257"></a>	<span class="n">registration_id</span> <span class="o">=</span> <span class="n">g_dbus_connection_register_object</span> <span class="p">(</span><span class="n">connection</span><span class="p">,</span>
+<a name="line-258"></a>	                  <span class="n">TERMINAL_FACTORY_SERVICE_PATH</span><span class="p">,</span>
+<a name="line-259"></a><span class="hll">	                  <span class="n">introspection_data</span><span class="o">-&gt;</span><span class="n">interfaces</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class='error2'>&lt;--- Null pointer dereference</span>
+</span><a name="line-260"></a>	                  <span class="o">&amp;</span><span class="n">interface_vtable</span><span class="p">,</span>
+<a name="line-261"></a>	                  <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>
+<a name="line-262"></a>	                  <span class="o">&amp;</span><span class="n">error</span><span class="p">);</span>
+<a name="line-263"></a>	<span class="n">g_dbus_node_info_unref</span> <span class="p">(</span><span class="n">introspection_data</span><span class="p">);</span>
+<a name="line-264"></a>
+<a name="line-265"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">registration_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<a name="line-266"></a>	<span class="p">{</span>
+<a name="line-267"></a>		<span class="n">g_printerr</span> <span class="p">(</span><span class="s">&quot;Failed to register object: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">);</span>
+<a name="line-268"></a>		<span class="n">g_error_free</span> <span class="p">(</span><span class="n">error</span><span class="p">);</span>
+<a name="line-269"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">exit_code</span> <span class="o">=</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<a name="line-270"></a>		<span class="n">gtk_main_quit</span> <span class="p">();</span>
+<a name="line-271"></a>	<span class="p">}</span>
+<a name="line-272"></a><span class="p">}</span>
+<a name="line-273"></a>
+<a name="line-274"></a><span class="k">static</span> <span class="kt">void</span>
+<a name="line-275"></a><span class="nf">name_acquired_cb</span> <span class="p">(</span><span class="n">GDBusConnection</span> <span class="o">*</span><span class="n">connection</span><span class="p">,</span>
+<a name="line-276"></a>                  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span>
+<a name="line-277"></a>                  <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">)</span>
+<a name="line-278"></a><span class="p">{</span>
+<a name="line-279"></a>	<span class="n">OwnData</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">OwnData</span> <span class="o">*</span><span class="p">)</span> <span class="n">user_data</span><span class="p">;</span>
+<a name="line-280"></a>	<span class="n">GError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-281"></a>
+<a name="line-282"></a>	<span class="n">_terminal_debug_print</span> <span class="p">(</span><span class="n">TERMINAL_DEBUG_FACTORY</span><span class="p">,</span>
+<a name="line-283"></a>	                       <span class="s">&quot;Acquired the name %s on the session bus</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+<a name="line-284"></a>
+<a name="line-285"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-286"></a>	<span class="p">{</span>
+<a name="line-287"></a>		<span class="cm">/* Name re-acquired!? */</span>
+<a name="line-288"></a>		<span class="n">g_assert_not_reached</span> <span class="p">();</span>
+<a name="line-289"></a>	<span class="p">}</span>
+<a name="line-290"></a>
+<a name="line-291"></a>
+<a name="line-292"></a>	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">terminal_app_handle_options</span> <span class="p">(</span><span class="n">terminal_app_get</span> <span class="p">(),</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span><span class="p">,</span> <span class="n">TRUE</span> <span class="cm">/* do resume */</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">))</span>
+<a name="line-293"></a>	<span class="p">{</span>
+<a name="line-294"></a>		<span class="n">g_printerr</span> <span class="p">(</span><span class="s">&quot;Failed to handle options: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">);</span>
+<a name="line-295"></a>		<span class="n">g_error_free</span> <span class="p">(</span><span class="n">error</span><span class="p">);</span>
+<a name="line-296"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">exit_code</span> <span class="o">=</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<a name="line-297"></a>		<span class="n">gtk_main_quit</span> <span class="p">();</span>
+<a name="line-298"></a>	<span class="p">}</span>
+<a name="line-299"></a>
+<a name="line-300"></a>	<span class="n">terminal_options_free</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span><span class="p">);</span>
+<a name="line-301"></a>	<span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-302"></a><span class="p">}</span>
+<a name="line-303"></a>
+<a name="line-304"></a><span class="k">static</span> <span class="kt">void</span>
+<a name="line-305"></a><span class="nf">name_lost_cb</span> <span class="p">(</span><span class="n">GDBusConnection</span> <span class="o">*</span><span class="n">connection</span><span class="p">,</span>
+<a name="line-306"></a>              <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span>
+<a name="line-307"></a>              <span class="n">gpointer</span> <span class="n">user_data</span><span class="p">)</span>
+<a name="line-308"></a><span class="p">{</span>
+<a name="line-309"></a>	<span class="n">OwnData</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">OwnData</span> <span class="o">*</span><span class="p">)</span> <span class="n">user_data</span><span class="p">;</span>
+<a name="line-310"></a>	<span class="n">GError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-311"></a>	<span class="kt">char</span> <span class="o">**</span><span class="n">envv</span><span class="p">;</span>
+<a name="line-312"></a>	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<a name="line-313"></a>	<span class="n">GVariantBuilder</span> <span class="n">builder</span><span class="p">;</span>
+<a name="line-314"></a>	<span class="n">GVariant</span> <span class="o">*</span><span class="n">value</span><span class="p">;</span>
+<a name="line-315"></a>	<span class="n">GString</span> <span class="o">*</span><span class="n">string</span><span class="p">;</span>
+<a name="line-316"></a>	<span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+<a name="line-317"></a>	<span class="n">gsize</span> <span class="n">len</span><span class="p">;</span>
+<a name="line-318"></a>
+<a name="line-319"></a>	<span class="n">_terminal_debug_print</span> <span class="p">(</span><span class="n">TERMINAL_DEBUG_FACTORY</span><span class="p">,</span>
+<a name="line-320"></a>	                       <span class="s">&quot;Lost the name %s on the session bus</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+<a name="line-321"></a>
+<a name="line-322"></a>	<span class="cm">/* Couldn&#39;t get the connection? No way to continue! */</span>
+<a name="line-323"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">connection</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-324"></a>	<span class="p">{</span>
+<a name="line-325"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">exit_code</span> <span class="o">=</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<a name="line-326"></a>		<span class="n">gtk_main_quit</span> <span class="p">();</span>
+<a name="line-327"></a>		<span class="k">return</span><span class="p">;</span>
+<a name="line-328"></a>	<span class="p">}</span>
+<a name="line-329"></a>
+<a name="line-330"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-331"></a>	<span class="p">{</span>
+<a name="line-332"></a>		<span class="cm">/* Already handled */</span>
+<a name="line-333"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">exit_code</span> <span class="o">=</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<a name="line-334"></a>		<span class="n">gtk_main_quit</span> <span class="p">();</span>
+<a name="line-335"></a>		<span class="k">return</span><span class="p">;</span>
+<a name="line-336"></a>	<span class="p">}</span>
+<a name="line-337"></a>
+<a name="line-338"></a>	<span class="n">_terminal_debug_print</span> <span class="p">(</span><span class="n">TERMINAL_DEBUG_FACTORY</span><span class="p">,</span>
+<a name="line-339"></a>	                       <span class="s">&quot;Forwarding arguments to existing instance</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<a name="line-340"></a>
+<a name="line-341"></a>	<span class="n">g_variant_builder_init</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">builder</span><span class="p">,</span> <span class="n">G_VARIANT_TYPE</span> <span class="p">(</span><span class="s">&quot;(ayayayayiay)&quot;</span><span class="p">));</span>
+<a name="line-342"></a>
+<a name="line-343"></a>	<span class="n">g_variant_builder_add</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">builder</span><span class="p">,</span> <span class="s">&quot;@ay&quot;</span><span class="p">,</span> <span class="n">string_to_ay</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">default_working_dir</span><span class="p">));</span>
+<a name="line-344"></a>	<span class="n">g_variant_builder_add</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">builder</span><span class="p">,</span> <span class="s">&quot;@ay&quot;</span><span class="p">,</span> <span class="n">string_to_ay</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">display_name</span><span class="p">));</span>
+<a name="line-345"></a>	<span class="n">g_variant_builder_add</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">builder</span><span class="p">,</span> <span class="s">&quot;@ay&quot;</span><span class="p">,</span> <span class="n">string_to_ay</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">startup_id</span><span class="p">));</span>
+<a name="line-346"></a>
+<a name="line-347"></a>	<span class="n">string</span> <span class="o">=</span> <span class="n">g_string_new</span> <span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+<a name="line-348"></a>	<span class="n">envv</span> <span class="o">=</span> <span class="n">g_get_environ</span> <span class="p">();</span>
+<a name="line-349"></a>	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">envv</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<a name="line-350"></a>	<span class="p">{</span>
+<a name="line-351"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<a name="line-352"></a>			<span class="n">g_string_append_c</span> <span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">);</span>
+<a name="line-353"></a>
+<a name="line-354"></a>		<span class="n">g_string_append</span> <span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">envv</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<a name="line-355"></a>	<span class="p">}</span>
+<a name="line-356"></a>	<span class="n">g_strfreev</span> <span class="p">(</span><span class="n">envv</span><span class="p">);</span>
+<a name="line-357"></a>
+<a name="line-358"></a>	<span class="n">len</span> <span class="o">=</span> <span class="n">string</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span>
+<a name="line-359"></a>	<span class="n">s</span> <span class="o">=</span> <span class="n">g_string_free</span> <span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">);</span>
+<a name="line-360"></a>	<span class="n">g_variant_builder_add</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">builder</span><span class="p">,</span> <span class="s">&quot;@ay&quot;</span><span class="p">,</span>
+<a name="line-361"></a>	                       <span class="n">g_variant_new_from_data</span> <span class="p">(</span><span class="n">G_VARIANT_TYPE</span> <span class="p">(</span><span class="s">&quot;ay&quot;</span><span class="p">),</span> <span class="n">s</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">,</span> <span class="n">g_free</span><span class="p">,</span> <span class="n">s</span><span class="p">));</span>
+<a name="line-362"></a>
+<a name="line-363"></a>	<span class="n">g_variant_builder_add</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">builder</span><span class="p">,</span> <span class="s">&quot;@i&quot;</span><span class="p">,</span> <span class="n">g_variant_new_int32</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">initial_workspace</span><span class="p">));</span>
+<a name="line-364"></a>
+<a name="line-365"></a>	<span class="n">string</span> <span class="o">=</span> <span class="n">g_string_new</span> <span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+<a name="line-366"></a>
+<a name="line-367"></a>	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">argc</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<a name="line-368"></a>	<span class="p">{</span>
+<a name="line-369"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<a name="line-370"></a>			<span class="n">g_string_append_c</span> <span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">);</span>
+<a name="line-371"></a>		<span class="n">g_string_append</span> <span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<a name="line-372"></a>	<span class="p">}</span>
+<a name="line-373"></a>
+<a name="line-374"></a>	<span class="n">len</span> <span class="o">=</span> <span class="n">string</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span>
+<a name="line-375"></a>	<span class="n">s</span> <span class="o">=</span> <span class="n">g_string_free</span> <span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">);</span>
+<a name="line-376"></a>	<span class="n">g_variant_builder_add</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">builder</span><span class="p">,</span> <span class="s">&quot;@ay&quot;</span><span class="p">,</span>
+<a name="line-377"></a>	                       <span class="n">g_variant_new_from_data</span> <span class="p">(</span><span class="n">G_VARIANT_TYPE</span> <span class="p">(</span><span class="s">&quot;ay&quot;</span><span class="p">),</span> <span class="n">s</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">,</span> <span class="n">g_free</span><span class="p">,</span> <span class="n">s</span><span class="p">));</span>
+<a name="line-378"></a>
+<a name="line-379"></a>	<span class="n">value</span> <span class="o">=</span> <span class="n">g_dbus_connection_call_sync</span> <span class="p">(</span><span class="n">connection</span><span class="p">,</span>
+<a name="line-380"></a>	                                     <span class="n">data</span><span class="o">-&gt;</span><span class="n">factory_name</span><span class="p">,</span>
+<a name="line-381"></a>	                                     <span class="n">TERMINAL_FACTORY_SERVICE_PATH</span><span class="p">,</span>
+<a name="line-382"></a>	                                     <span class="n">TERMINAL_FACTORY_INTERFACE_NAME</span><span class="p">,</span>
+<a name="line-383"></a>	                                     <span class="s">&quot;HandleArguments&quot;</span><span class="p">,</span>
+<a name="line-384"></a>	                                     <span class="n">g_variant_builder_end</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">builder</span><span class="p">),</span>
+<a name="line-385"></a>	                                     <span class="n">G_VARIANT_TYPE</span> <span class="p">(</span><span class="s">&quot;()&quot;</span><span class="p">),</span>
+<a name="line-386"></a>	                                     <span class="n">G_DBUS_CALL_FLAGS_NONE</span><span class="p">,</span>
+<a name="line-387"></a>	                                     <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<a name="line-388"></a>	                                     <span class="nb">NULL</span><span class="p">,</span>
+<a name="line-389"></a>	                                     <span class="o">&amp;</span><span class="n">error</span><span class="p">);</span>
+<a name="line-390"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-391"></a>	<span class="p">{</span>
+<a name="line-392"></a>		<span class="n">g_printerr</span> <span class="p">(</span><span class="s">&quot;Failed to forward arguments: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">);</span>
+<a name="line-393"></a>		<span class="n">g_error_free</span> <span class="p">(</span><span class="n">error</span><span class="p">);</span>
+<a name="line-394"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">exit_code</span> <span class="o">=</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<a name="line-395"></a>		<span class="n">gtk_main_quit</span> <span class="p">();</span>
+<a name="line-396"></a>	<span class="p">}</span>
+<a name="line-397"></a>	<span class="k">else</span>
+<a name="line-398"></a>	<span class="p">{</span>
+<a name="line-399"></a>		<span class="n">g_variant_unref</span> <span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<a name="line-400"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">exit_code</span> <span class="o">=</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<a name="line-401"></a>	<span class="p">}</span>
+<a name="line-402"></a>
+<a name="line-403"></a>	<span class="n">terminal_options_free</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span><span class="p">);</span>
+<a name="line-404"></a>	<span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-405"></a>
+<a name="line-406"></a>	<span class="n">gtk_main_quit</span> <span class="p">();</span>
+<a name="line-407"></a><span class="p">}</span>
+<a name="line-408"></a>
+<a name="line-409"></a><span class="cm">/* Settings storage works as follows:</span>
+<a name="line-410"></a><span class="cm"> *   /apps/mate-terminal/global/</span>
+<a name="line-411"></a><span class="cm"> *   /apps/mate-terminal/profiles/Foo/</span>
+<a name="line-412"></a><span class="cm"> *</span>
+<a name="line-413"></a><span class="cm"> * It&#39;s somewhat tricky to manage the profiles/ dir since we need to track</span>
+<a name="line-414"></a><span class="cm"> * the list of profiles, but GSettings doesn&#39;t have a concept of notifying that</span>
+<a name="line-415"></a><span class="cm"> * a directory has appeared or disappeared.</span>
+<a name="line-416"></a><span class="cm"> *</span>
+<a name="line-417"></a><span class="cm"> * Session state is stored entirely in the RestartCommand command line.</span>
+<a name="line-418"></a><span class="cm"> *</span>
+<a name="line-419"></a><span class="cm"> * The number one rule: all stored information is EITHER per-session,</span>
+<a name="line-420"></a><span class="cm"> * per-profile, or set from a command line option. THERE CAN BE NO</span>
+<a name="line-421"></a><span class="cm"> * OVERLAP. The UI and implementation totally break if you overlap</span>
+<a name="line-422"></a><span class="cm"> * these categories. See mate-terminal 1.x for why.</span>
+<a name="line-423"></a><span class="cm"> *</span>
+<a name="line-424"></a><span class="cm"> * Don&#39;t use this code as an example of how to use GSettings - it&#39;s hugely</span>
+<a name="line-425"></a><span class="cm"> * overcomplicated due to the profiles stuff. Most apps should not</span>
+<a name="line-426"></a><span class="cm"> * have to do scary things of this nature, and should not have</span>
+<a name="line-427"></a><span class="cm"> * a profiles feature.</span>
+<a name="line-428"></a><span class="cm"> *</span>
+<a name="line-429"></a><span class="cm"> */</span>
+<a name="line-430"></a>
+<a name="line-431"></a><span class="cm">/* Copied from libcaja/caja-program-choosing.c; Needed in case</span>
+<a name="line-432"></a><span class="cm"> * we have no DESKTOP_STARTUP_ID (with its accompanying timestamp).</span>
+<a name="line-433"></a><span class="cm"> */</span>
+<a name="line-434"></a><span class="k">static</span> <span class="n">Time</span>
+<a name="line-435"></a><span class="nf">slowly_and_stupidly_obtain_timestamp</span> <span class="p">(</span><span class="n">Display</span> <span class="o">*</span><span class="n">xdisplay</span><span class="p">)</span>
+<a name="line-436"></a><span class="p">{</span>
+<a name="line-437"></a>	<span class="n">Window</span> <span class="n">xwindow</span><span class="p">;</span>
+<a name="line-438"></a>	<span class="n">XEvent</span> <span class="n">event</span><span class="p">;</span>
+<a name="line-439"></a>
+<a name="line-440"></a>	<span class="p">{</span>
+<a name="line-441"></a>		<span class="n">XSetWindowAttributes</span> <span class="n">attrs</span><span class="p">;</span>
+<a name="line-442"></a>		<span class="n">Atom</span> <span class="n">atom_name</span><span class="p">;</span>
+<a name="line-443"></a>		<span class="n">Atom</span> <span class="n">atom_type</span><span class="p">;</span>
+<a name="line-444"></a>		<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+<a name="line-445"></a>
+<a name="line-446"></a>		<span class="n">attrs</span><span class="p">.</span><span class="n">override_redirect</span> <span class="o">=</span> <span class="n">True</span><span class="p">;</span>
+<a name="line-447"></a>		<span class="n">attrs</span><span class="p">.</span><span class="n">event_mask</span> <span class="o">=</span> <span class="n">PropertyChangeMask</span> <span class="o">|</span> <span class="n">StructureNotifyMask</span><span class="p">;</span>
+<a name="line-448"></a>
+<a name="line-449"></a>		<span class="n">xwindow</span> <span class="o">=</span>
+<a name="line-450"></a>		    <span class="n">XCreateWindow</span> <span class="p">(</span><span class="n">xdisplay</span><span class="p">,</span>
+<a name="line-451"></a>		                   <span class="n">RootWindow</span> <span class="p">(</span><span class="n">xdisplay</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<a name="line-452"></a>		                   <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+<a name="line-453"></a>		                   <span class="mi">0</span><span class="p">,</span>
+<a name="line-454"></a>		                   <span class="n">CopyFromParent</span><span class="p">,</span>
+<a name="line-455"></a>		                   <span class="n">CopyFromParent</span><span class="p">,</span>
+<a name="line-456"></a>		                   <span class="p">(</span><span class="n">Visual</span> <span class="o">*</span><span class="p">)</span><span class="n">CopyFromParent</span><span class="p">,</span>
+<a name="line-457"></a>		                   <span class="n">CWOverrideRedirect</span> <span class="o">|</span> <span class="n">CWEventMask</span><span class="p">,</span>
+<a name="line-458"></a>		                   <span class="o">&amp;</span><span class="n">attrs</span><span class="p">);</span>
+<a name="line-459"></a>
+<a name="line-460"></a>		<span class="n">atom_name</span> <span class="o">=</span> <span class="n">XInternAtom</span> <span class="p">(</span><span class="n">xdisplay</span><span class="p">,</span> <span class="s">&quot;WM_NAME&quot;</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
+<a name="line-461"></a>		<span class="n">g_assert</span> <span class="p">(</span><span class="n">atom_name</span> <span class="o">!=</span> <span class="n">None</span><span class="p">);</span>
+<a name="line-462"></a>		<span class="n">atom_type</span> <span class="o">=</span> <span class="n">XInternAtom</span> <span class="p">(</span><span class="n">xdisplay</span><span class="p">,</span> <span class="s">&quot;STRING&quot;</span><span class="p">,</span> <span class="n">TRUE</span><span class="p">);</span>
+<a name="line-463"></a>		<span class="n">g_assert</span> <span class="p">(</span><span class="n">atom_type</span> <span class="o">!=</span> <span class="n">None</span><span class="p">);</span>
+<a name="line-464"></a>
+<a name="line-465"></a>		<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Fake Window&quot;</span><span class="p">;</span>
+<a name="line-466"></a>		<span class="n">XChangeProperty</span> <span class="p">(</span><span class="n">xdisplay</span><span class="p">,</span>
+<a name="line-467"></a>		                 <span class="n">xwindow</span><span class="p">,</span> <span class="n">atom_name</span><span class="p">,</span>
+<a name="line-468"></a>		                 <span class="n">atom_type</span><span class="p">,</span>
+<a name="line-469"></a>		                 <span class="mi">8</span><span class="p">,</span> <span class="n">PropModeReplace</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">name</span><span class="p">,</span> <span class="n">strlen</span> <span class="p">(</span><span class="n">name</span><span class="p">));</span>
+<a name="line-470"></a>	<span class="p">}</span>
+<a name="line-471"></a>
+<a name="line-472"></a>	<span class="n">XWindowEvent</span> <span class="p">(</span><span class="n">xdisplay</span><span class="p">,</span>
+<a name="line-473"></a>	              <span class="n">xwindow</span><span class="p">,</span>
+<a name="line-474"></a>	              <span class="n">PropertyChangeMask</span><span class="p">,</span>
+<a name="line-475"></a>	              <span class="o">&amp;</span><span class="n">event</span><span class="p">);</span>
+<a name="line-476"></a>
+<a name="line-477"></a>	<span class="n">XDestroyWindow</span><span class="p">(</span><span class="n">xdisplay</span><span class="p">,</span> <span class="n">xwindow</span><span class="p">);</span>
+<a name="line-478"></a>
+<a name="line-479"></a>	<span class="k">return</span> <span class="n">event</span><span class="p">.</span><span class="n">xproperty</span><span class="p">.</span><span class="n">time</span><span class="p">;</span>
+<a name="line-480"></a><span class="p">}</span>
+<a name="line-481"></a>
+<a name="line-482"></a><span class="k">static</span> <span class="kt">char</span> <span class="o">*</span>
+<a name="line-483"></a><span class="nf">get_factory_name_for_display</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">display_name</span><span class="p">)</span>
+<a name="line-484"></a><span class="p">{</span>
+<a name="line-485"></a>	<span class="n">GString</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+<a name="line-486"></a>	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+<a name="line-487"></a>
+<a name="line-488"></a>	<span class="n">name</span> <span class="o">=</span> <span class="n">g_string_sized_new</span> <span class="p">(</span><span class="n">strlen</span> <span class="p">(</span><span class="n">TERMINAL_FACTORY_SERVICE_NAME_PREFIX</span><span class="p">)</span> <span class="o">+</span> <span class="n">strlen</span> <span class="p">(</span><span class="n">display_name</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="cm">/* NUL */</span><span class="p">);</span>
+<a name="line-489"></a>	<span class="n">g_string_append</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">TERMINAL_FACTORY_SERVICE_NAME_PREFIX</span><span class="p">);</span>
+<a name="line-490"></a>
+<a name="line-491"></a>	<span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">display_name</span><span class="p">;</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span> <span class="o">++</span><span class="n">p</span><span class="p">)</span>
+<a name="line-492"></a>	<span class="p">{</span>
+<a name="line-493"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">g_ascii_isalnum</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">))</span>
+<a name="line-494"></a>			<span class="n">g_string_append_c</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+<a name="line-495"></a>		<span class="k">else</span>
+<a name="line-496"></a>			<span class="n">g_string_append_c</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="sc">&#39;_&#39;</span><span class="p">);</span>
+<a name="line-497"></a>	<span class="p">}</span>
+<a name="line-498"></a>
+<a name="line-499"></a>	<span class="n">_terminal_debug_print</span> <span class="p">(</span><span class="n">TERMINAL_DEBUG_FACTORY</span><span class="p">,</span>
+<a name="line-500"></a>	                       <span class="s">&quot;Factory name is </span><span class="se">\&quot;</span><span class="s">%s</span><span class="se">\&quot;\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">);</span>
+<a name="line-501"></a>
+<a name="line-502"></a>	<span class="k">return</span> <span class="n">g_string_free</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">);</span>
+<a name="line-503"></a><span class="p">}</span>
+<a name="line-504"></a>
+<a name="line-505"></a><span class="k">static</span> <span class="kt">int</span>
+<a name="line-506"></a><span class="nf">get_initial_workspace</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a name="line-507"></a><span class="p">{</span>
+<a name="line-508"></a>  <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a name="line-509"></a>  <span class="n">GdkWindow</span> <span class="o">*</span><span class="n">window</span><span class="p">;</span>
+<a name="line-510"></a>  <span class="n">guchar</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-511"></a>  <span class="n">GdkAtom</span> <span class="n">atom</span><span class="p">;</span>
+<a name="line-512"></a>  <span class="n">GdkAtom</span> <span class="n">cardinal_atom</span><span class="p">;</span>
+<a name="line-513"></a>
+<a name="line-514"></a>  <span class="n">window</span> <span class="o">=</span> <span class="n">gdk_get_default_root_window</span><span class="p">();</span>
+<a name="line-515"></a>
+<a name="line-516"></a>  <span class="n">atom</span> <span class="o">=</span> <span class="n">gdk_atom_intern_static_string</span> <span class="p">(</span><span class="s">&quot;_NET_CURRENT_DESKTOP&quot;</span><span class="p">);</span>
+<a name="line-517"></a>  <span class="n">cardinal_atom</span> <span class="o">=</span> <span class="n">gdk_atom_intern_static_string</span> <span class="p">(</span><span class="s">&quot;CARDINAL&quot;</span><span class="p">);</span>
+<a name="line-518"></a>
+<a name="line-519"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">gdk_property_get</span> <span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">cardinal_atom</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">FALSE</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
+<a name="line-520"></a>	  <span class="n">ret</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">;</span>
+<a name="line-521"></a>	  <span class="n">g_free</span> <span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<a name="line-522"></a>  <span class="p">}</span>
+<a name="line-523"></a>  <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<a name="line-524"></a><span class="p">}</span>
+<a name="line-525"></a>
+<a name="line-526"></a><span class="kt">int</span>
+<a name="line-527"></a><span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<a name="line-528"></a><span class="p">{</span>
+<a name="line-529"></a>	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<a name="line-530"></a>	<span class="kt">char</span> <span class="o">**</span><span class="n">argv_copy</span><span class="p">;</span>
+<a name="line-531"></a>	<span class="kt">int</span> <span class="n">argc_copy</span><span class="p">;</span>
+<a name="line-532"></a>	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">startup_id</span><span class="p">,</span> <span class="o">*</span><span class="n">display_name</span><span class="p">,</span> <span class="o">*</span><span class="n">home_dir</span><span class="p">;</span>
+<a name="line-533"></a>	<span class="n">GdkDisplay</span> <span class="o">*</span><span class="n">display</span><span class="p">;</span>
+<a name="line-534"></a>	<span class="n">TerminalOptions</span> <span class="o">*</span><span class="n">options</span><span class="p">;</span>
+<a name="line-535"></a>	<span class="n">GError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-536"></a>	<span class="kt">char</span> <span class="o">*</span><span class="n">working_directory</span><span class="p">;</span>
+<a name="line-537"></a>	<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<a name="line-538"></a>
+<a name="line-539"></a>	<span class="n">setlocale</span> <span class="p">(</span><span class="n">LC_ALL</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+<a name="line-540"></a>
+<a name="line-541"></a>	<span class="n">bindtextdomain</span> <span class="p">(</span><span class="n">GETTEXT_PACKAGE</span><span class="p">,</span> <span class="n">TERM_LOCALEDIR</span><span class="p">);</span>
+<a name="line-542"></a>	<span class="n">bind_textdomain_codeset</span> <span class="p">(</span><span class="n">GETTEXT_PACKAGE</span><span class="p">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="p">);</span>
+<a name="line-543"></a>	<span class="n">textdomain</span> <span class="p">(</span><span class="n">GETTEXT_PACKAGE</span><span class="p">);</span>
+<a name="line-544"></a>
+<a name="line-545"></a>	<span class="n">_terminal_debug_init</span> <span class="p">();</span>
+<a name="line-546"></a>
+<a name="line-547"></a>	<span class="cm">/* Make a NULL-terminated copy since we may need it later */</span>
+<a name="line-548"></a>	<span class="n">argv_copy</span> <span class="o">=</span> <span class="n">g_new</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">,</span> <span class="n">argc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<a name="line-549"></a>	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">argc</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<a name="line-550"></a>		<span class="n">argv_copy</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">argv</span> <span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<a name="line-551"></a>	<span class="n">argv_copy</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="line-552"></a>	<span class="n">argc_copy</span> <span class="o">=</span> <span class="n">argc</span><span class="p">;</span>
+<a name="line-553"></a>
+<a name="line-554"></a>	<span class="n">startup_id</span> <span class="o">=</span> <span class="n">g_getenv</span> <span class="p">(</span><span class="s">&quot;DESKTOP_STARTUP_ID&quot;</span><span class="p">);</span>
+<a name="line-555"></a>
+<a name="line-556"></a>	<span class="n">working_directory</span> <span class="o">=</span> <span class="n">g_get_current_dir</span> <span class="p">();</span>
+<a name="line-557"></a>
+<a name="line-558"></a>	<span class="n">gdk_set_allowed_backends</span> <span class="p">(</span><span class="s">&quot;x11&quot;</span><span class="p">);</span>
+<a name="line-559"></a>
+<a name="line-560"></a>	<span class="cm">/* Now change directory to $HOME so we don&#39;t prevent unmounting, e.g. if the</span>
+<a name="line-561"></a><span class="cm">	 * factory is started by caja-open-terminal. See bug #565328.</span>
+<a name="line-562"></a><span class="cm">	 * On failure back to /.</span>
+<a name="line-563"></a><span class="cm">	 */</span>
+<a name="line-564"></a>	<span class="n">home_dir</span> <span class="o">=</span> <span class="n">g_get_home_dir</span> <span class="p">();</span>
+<a name="line-565"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">home_dir</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">chdir</span> <span class="p">(</span><span class="n">home_dir</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+<a name="line-566"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">chdir</span> <span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+<a name="line-567"></a>			<span class="n">g_warning</span> <span class="p">(</span><span class="s">&quot;Could not change working directory.&quot;</span><span class="p">);</span>
+<a name="line-568"></a>
+<a name="line-569"></a>	<span class="n">options</span> <span class="o">=</span> <span class="n">terminal_options_parse</span> <span class="p">(</span><span class="n">working_directory</span><span class="p">,</span>
+<a name="line-570"></a>	                                  <span class="nb">NULL</span><span class="p">,</span>
+<a name="line-571"></a>	                                  <span class="n">startup_id</span><span class="p">,</span>
+<a name="line-572"></a>	                                  <span class="nb">NULL</span><span class="p">,</span>
+<a name="line-573"></a>	                                  <span class="n">FALSE</span><span class="p">,</span>
+<a name="line-574"></a>	                                  <span class="n">FALSE</span><span class="p">,</span>
+<a name="line-575"></a>	                                  <span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span><span class="p">,</span>
+<a name="line-576"></a>	                                  <span class="o">&amp;</span><span class="n">error</span><span class="p">,</span>
+<a name="line-577"></a>	                                  <span class="n">gtk_get_option_group</span> <span class="p">(</span><span class="n">TRUE</span><span class="p">),</span>
+<a name="line-578"></a>	                                  <span class="n">egg_sm_client_get_option_group</span> <span class="p">(),</span>
+<a name="line-579"></a>	                                  <span class="nb">NULL</span><span class="p">);</span>
+<a name="line-580"></a>
+<a name="line-581"></a>	<span class="n">g_free</span> <span class="p">(</span><span class="n">working_directory</span><span class="p">);</span>
+<a name="line-582"></a>
+<a name="line-583"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">options</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-584"></a>	<span class="p">{</span>
+<a name="line-585"></a>		<span class="n">g_printerr</span> <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s">&quot;Failed to parse arguments: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">),</span> <span class="n">error</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">);</span>
+<a name="line-586"></a>		<span class="n">g_error_free</span> <span class="p">(</span><span class="n">error</span><span class="p">);</span>
+<a name="line-587"></a>		<span class="n">exit</span> <span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+<a name="line-588"></a>	<span class="p">}</span>
+<a name="line-589"></a>
+<a name="line-590"></a>	<span class="n">g_set_application_name</span> <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s">&quot;Terminal&quot;</span><span class="p">));</span>
+<a name="line-591"></a>
+<a name="line-592"></a>	<span class="cm">/* Unset the these env variables, so they doesn&#39;t end up</span>
+<a name="line-593"></a><span class="cm">	 * in the factory&#39;s env and thus in the terminals&#39; envs.</span>
+<a name="line-594"></a><span class="cm">	 */</span>
+<a name="line-595"></a>	<span class="n">g_unsetenv</span> <span class="p">(</span><span class="s">&quot;DESKTOP_STARTUP_ID&quot;</span><span class="p">);</span>
+<a name="line-596"></a>	<span class="n">g_unsetenv</span> <span class="p">(</span><span class="s">&quot;GIO_LAUNCHED_DESKTOP_FILE_PID&quot;</span><span class="p">);</span>
+<a name="line-597"></a>	<span class="n">g_unsetenv</span> <span class="p">(</span><span class="s">&quot;GIO_LAUNCHED_DESKTOP_FILE&quot;</span><span class="p">);</span>
+<a name="line-598"></a>
+<a name="line-599"></a>	<span class="n">display</span> <span class="o">=</span> <span class="n">gdk_display_get_default</span> <span class="p">();</span>
+<a name="line-600"></a>	<span class="n">display_name</span> <span class="o">=</span> <span class="n">gdk_display_get_name</span> <span class="p">(</span><span class="n">display</span><span class="p">);</span>
+<a name="line-601"></a>	<span class="n">options</span><span class="o">-&gt;</span><span class="n">display_name</span> <span class="o">=</span> <span class="n">g_strdup</span> <span class="p">(</span><span class="n">display_name</span><span class="p">);</span>
+<a name="line-602"></a>
+<a name="line-603"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">startup_id</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-604"></a>	<span class="p">{</span>
+<a name="line-605"></a>		<span class="cm">/* Create a fake one containing a timestamp that we can use */</span>
+<a name="line-606"></a>		<span class="n">Time</span> <span class="n">timestamp</span><span class="p">;</span>
+<a name="line-607"></a>
+<a name="line-608"></a>		<span class="n">timestamp</span> <span class="o">=</span> <span class="n">slowly_and_stupidly_obtain_timestamp</span> <span class="p">(</span><span class="n">GDK_DISPLAY_XDISPLAY</span> <span class="p">(</span><span class="n">gdk_display_get_default</span> <span class="p">()));</span>
+<a name="line-609"></a>
+<a name="line-610"></a>		<span class="n">options</span><span class="o">-&gt;</span><span class="n">startup_id</span> <span class="o">=</span> <span class="n">g_strdup_printf</span> <span class="p">(</span><span class="s">&quot;_TIME%lu&quot;</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">);</span>
+<a name="line-611"></a>	<span class="p">}</span>
+<a name="line-612"></a>
+<a name="line-613"></a>	<span class="k">if</span> <span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">use_factory</span><span class="p">)</span>
+<a name="line-614"></a>	<span class="p">{</span>
+<a name="line-615"></a>		<span class="n">OwnData</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+<a name="line-616"></a>		<span class="n">guint</span> <span class="n">owner_id</span><span class="p">;</span>
+<a name="line-617"></a>
+<a name="line-618"></a>		<span class="n">data</span> <span class="o">=</span> <span class="n">g_new</span> <span class="p">(</span><span class="n">OwnData</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<a name="line-619"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">factory_name</span> <span class="o">=</span> <span class="n">get_factory_name_for_display</span> <span class="p">(</span><span class="n">display_name</span><span class="p">);</span>
+<a name="line-620"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span><span class="p">;</span>
+<a name="line-621"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">exit_code</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a name="line-622"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">argv</span> <span class="o">=</span> <span class="n">argv_copy</span><span class="p">;</span>
+<a name="line-623"></a>		<span class="n">data</span><span class="o">-&gt;</span><span class="n">argc</span> <span class="o">=</span> <span class="n">argc_copy</span><span class="p">;</span>
+<a name="line-624"></a>
+<a name="line-625"></a>		<span class="n">gtk_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+<a name="line-626"></a>		<span class="n">options</span><span class="o">-&gt;</span><span class="n">initial_workspace</span> <span class="o">=</span> <span class="n">get_initial_workspace</span> <span class="p">();</span>
+<a name="line-627"></a>
+<a name="line-628"></a>		<span class="n">owner_id</span> <span class="o">=</span> <span class="n">g_bus_own_name</span> <span class="p">(</span><span class="n">G_BUS_TYPE_SESSION</span><span class="p">,</span>
+<a name="line-629"></a>		                           <span class="n">data</span><span class="o">-&gt;</span><span class="n">factory_name</span><span class="p">,</span>
+<a name="line-630"></a>		                           <span class="n">G_BUS_NAME_OWNER_FLAGS_NONE</span><span class="p">,</span>
+<a name="line-631"></a>		                           <span class="n">bus_acquired_cb</span><span class="p">,</span>
+<a name="line-632"></a>		                           <span class="n">name_acquired_cb</span><span class="p">,</span>
+<a name="line-633"></a>		                           <span class="n">name_lost_cb</span><span class="p">,</span>
+<a name="line-634"></a>		                           <span class="n">data</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<a name="line-635"></a>
+<a name="line-636"></a>		<span class="n">gtk_main</span> <span class="p">();</span>
+<a name="line-637"></a>
+<a name="line-638"></a>		<span class="n">ret</span> <span class="o">=</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">exit_code</span><span class="p">;</span>
+<a name="line-639"></a>		<span class="n">g_bus_unown_name</span> <span class="p">(</span><span class="n">owner_id</span><span class="p">);</span>
+<a name="line-640"></a>
+<a name="line-641"></a>		<span class="n">g_free</span> <span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">factory_name</span><span class="p">);</span>
+<a name="line-642"></a>		<span class="n">g_free</span> <span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<a name="line-643"></a>
+<a name="line-644"></a>	<span class="p">}</span>
+<a name="line-645"></a>	<span class="k">else</span>
+<a name="line-646"></a>	<span class="p">{</span>
+<a name="line-647"></a>
+<a name="line-648"></a>		<span class="n">terminal_app_handle_options</span> <span class="p">(</span><span class="n">terminal_app_get</span> <span class="p">(),</span> <span class="n">options</span><span class="p">,</span> <span class="n">TRUE</span> <span class="cm">/* allow resume */</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">);</span>
+<a name="line-649"></a>		<span class="n">terminal_options_free</span> <span class="p">(</span><span class="n">options</span><span class="p">);</span>
+<a name="line-650"></a>
+<a name="line-651"></a>		<span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+<a name="line-652"></a>		<span class="p">{</span>
+<a name="line-653"></a>			<span class="n">gtk_main</span> <span class="p">();</span>
+<a name="line-654"></a>		<span class="p">}</span>
+<a name="line-655"></a>		<span class="k">else</span>
+<a name="line-656"></a>		<span class="p">{</span>
+<a name="line-657"></a>			<span class="n">g_printerr</span> <span class="p">(</span><span class="s">&quot;Error handling options: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">error</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">);</span>
+<a name="line-658"></a>			<span class="n">g_error_free</span> <span class="p">(</span><span class="n">error</span><span class="p">);</span>
+<a name="line-659"></a>			<span class="n">ret</span> <span class="o">=</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<a name="line-660"></a>		<span class="p">}</span>
+<a name="line-661"></a>	<span class="p">}</span>
+<a name="line-662"></a>
+<a name="line-663"></a>	<span class="n">terminal_app_shutdown</span> <span class="p">();</span>
+<a name="line-664"></a>
+<a name="line-665"></a>	<span class="n">g_free</span> <span class="p">(</span><span class="n">argv_copy</span><span class="p">);</span>
+<a name="line-666"></a>
+<a name="line-667"></a>	<span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<a name="line-668"></a><span class="p">}</span>
+</pre></div>
+</td></tr></table>
+      </div>
+      <div id="footer">
+        <p>
+         Cppcheck 1.90 - a tool for static C/C++ code analysis</br>
+         </br>
+         Internet: <a href="http://cppcheck.net">http://cppcheck.net</a></br>
+         IRC: <a href="irc://irc.freenode.net/cppcheck">irc://irc.freenode.net/cppcheck</a></br>
+        </p>
+      </div>
+  </body>
+</html>

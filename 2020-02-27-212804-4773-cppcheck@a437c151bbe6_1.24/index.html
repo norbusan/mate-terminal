@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cppcheck - HTML report - mate-terminal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+    <script language="javascript">
+      function getStyle(el,styleProp) {
+        if (el.currentStyle)
+          var y = el.currentStyle[styleProp];
+        else if (window.getComputedStyle)
+          var y = document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
+        return y;
+      }
+      function toggle() {
+        var el = this.expandable_content;
+        var mark = this.expandable_marker;
+        if (el.style.display == "block") {
+          el.style.display = "none";
+          mark.innerHTML = "[+]";
+        } else {
+          el.style.display = "block";
+          mark.innerHTML = "[-]";
+        }
+      }
+      function init_expandables() {
+        var elts = document.getElementsByClassName("expandable");
+        for (var i = 0; i < elts.length; i++) {
+          var el = elts[i];
+          var clickable = el.getElementsByTagName("span")[0];
+          var marker = clickable.getElementsByClassName("marker")[0];
+          var content = el.getElementsByClassName("content")[0];
+          var width = clickable.clientWidth - parseInt(getStyle(content, "padding-left")) - parseInt(getStyle(content, "padding-right"));
+          content.style.width = width + "px";
+          clickable.expandable_content = content;
+          clickable.expandable_marker = marker;
+          clickable.onclick = toggle;
+        }
+      }
+      function set_class_display(c, st) {
+        var elements = document.querySelectorAll('.' + c),
+            len = elements.length;
+        for (i = 0; i < len; i++) {
+            elements[i].style.display = st;
+        }
+      }
+      function toggle_class_visibility(id) {
+        var box = document.getElementById(id);
+        set_class_display(id, box.checked ? '' : 'none');
+      }
+      function toggle_all(){
+        var elts = document.getElementsByTagName("input");
+        for (var i = 1; i < elts.length; i++) {           
+          var el = elts[i];
+          el.checked ? el.checked=false : el.checked=true;
+          toggle_class_visibility(el.id);        
+        }            
+      }
+
+    </script>
+  </head>
+  <body onload="init_expandables()">
+      <div id="header">
+        <h1>Cppcheck report - mate-terminal:  </h1>
+      </div>
+      <div id="menu_index">
+       <p id="filename"><a href="index.html">Defect summary;</a> </p>
+
+       <label><input type="checkbox" onclick="toggle_all()" checked> Toggle all</label>
+       <table>
+           <tr><th>Show</th><th>#</th><th>Defect ID</th></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='incorrectStringBooleanError' name='incorrectStringBooleanError' checked></td><td>38</td><td>incorrectStringBooleanError</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='variableScope' name='variableScope' checked></td><td>30</td><td>variableScope</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='varFuncNullUB' name='varFuncNullUB' checked></td><td>7</td><td>varFuncNullUB</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='unusedStructMember' name='unusedStructMember' checked></td><td>4</td><td>unusedStructMember</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='nullPointerRedundantCheck' name='nullPointerRedundantCheck' checked></td><td>3</td><td>nullPointerRedundantCheck</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='missingInclude' name='missingInclude' checked></td><td>1</td><td>missingInclude</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='redundantAssignment' name='redundantAssignment' checked></td><td>1</td><td>redundantAssignment</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='unreachableCode' name='unreachableCode' checked></td><td>1</td><td>unreachableCode</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='unreadVariable' name='unreadVariable' checked></td><td>1</td><td>unreadVariable</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='unusedVariable' name='unusedVariable' checked></td><td>1</td><td>unusedVariable</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='uselessAssignmentPtrArg' name='uselessAssignmentPtrArg' checked></td><td>1</td><td>uselessAssignmentPtrArg</td></tr>
+           <tr><td></td><td>88</td><td>total</td></tr>
+       </table>
+       <p><a href="stats.html">Statistics</a></p>
+      </div>
+      <div id="content_index">
+
+       <table>
+       <tr><th>Line</th><th>Id</th><th>CWE</th><th>Severity</th><th>Message</th></tr>
+       <tr><td colspan='5'><a href='16.html'></a></td></tr>
+         <tr class="missingInclude"><td></td><td>missingInclude</td><td></td><td>information</td><td>Cppcheck cannot find all the include files (use --check-config for details)</td></tr>
+       <tr><td colspan='5'><a href='0.html'>src/eggdesktopfile.c</a></td></tr>
+       <tr class="variableScope"><td><a href="0.html#line-483">483</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;try_exec&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="0.html#line-483">483</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;found_program&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="0.html#line-484">484</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;only_show_in&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="0.html#line-484">484</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;not_show_in&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="0.html#line-486">486</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;i&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="0.html#line-608">608</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;p&apos; can be reduced.</td></tr>
+       <tr><td colspan='5'><a href='1.html'>src/eggsmclient-xsmp.c</a></td></tr>
+       <tr class="variableScope"><td><a href="1.html#line-232">232</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;cmdline&apos; can be reduced.</td></tr>
+       <tr class="varFuncNullUB"><td><a href="1.html#line-280">280</a></td><td>varFuncNullUB</td><td><a href='https://cwe.mitre.org/data/definitions/475.html'>475</a></td><td>portability</td><td >Passing NULL after the last typed argument to a variadic function leads to undefined behaviour.</td></tr>
+       <tr class="varFuncNullUB"><td><a href="1.html#line-288">288</a></td><td>varFuncNullUB</td><td><a href='https://cwe.mitre.org/data/definitions/475.html'>475</a></td><td>portability</td><td >Passing NULL after the last typed argument to a variadic function leads to undefined behaviour.</td></tr>
+       <tr class="uselessAssignmentPtrArg"><td><a href="1.html#line-343">343</a></td><td>uselessAssignmentPtrArg</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?</td></tr>
+       <tr class="variableScope"><td><a href="1.html#line-795">795</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;discard&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="1.html#line-796">796</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;fd&apos; can be reduced.</td></tr>
+       <tr class="varFuncNullUB"><td><a href="1.html#line-808">808</a></td><td>varFuncNullUB</td><td><a href='https://cwe.mitre.org/data/definitions/475.html'>475</a></td><td>portability</td><td >Passing NULL after the last typed argument to a variadic function leads to undefined behaviour.</td></tr>
+       <tr class="varFuncNullUB"><td><a href="1.html#line-816">816</a></td><td>varFuncNullUB</td><td><a href='https://cwe.mitre.org/data/definitions/475.html'>475</a></td><td>portability</td><td >Passing NULL after the last typed argument to a variadic function leads to undefined behaviour.</td></tr>
+       <tr class="varFuncNullUB"><td><a href="1.html#line-821">821</a></td><td>varFuncNullUB</td><td><a href='https://cwe.mitre.org/data/definitions/475.html'>475</a></td><td>portability</td><td >Passing NULL after the last typed argument to a variadic function leads to undefined behaviour.</td></tr>
+       <tr class="variableScope"><td><a href="1.html#line-842">842</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;keys&apos; can be reduced.</td></tr>
+       <tr class="varFuncNullUB"><td><a href="1.html#line-947">947</a></td><td>varFuncNullUB</td><td><a href='https://cwe.mitre.org/data/definitions/475.html'>475</a></td><td>portability</td><td >Passing NULL after the last typed argument to a variadic function leads to undefined behaviour.</td></tr>
+       <tr class="varFuncNullUB"><td><a href="1.html#line-956">956</a></td><td>varFuncNullUB</td><td><a href='https://cwe.mitre.org/data/definitions/475.html'>475</a></td><td>portability</td><td >Passing NULL after the last typed argument to a variadic function leads to undefined behaviour.</td></tr>
+       <tr><td colspan='5'><a href='2.html'>src/profile-editor.c</a></td></tr>
+       <tr class="variableScope"><td><a href="2.html#line-458">458</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;w&apos; can be reduced.</td></tr>
+       <tr><td colspan='5'><a href='3.html'>src/skey/sha1.c</a></td></tr>
+       <tr class="redundantAssignment"><td><a href="3.html#line-76">76</a></td><td>redundantAssignment</td><td><a href='https://cwe.mitre.org/data/definitions/563.html'>563</a></td><td>style</td><td >Variable &apos;results&apos; is reassigned a value before the old one has been used.</td></tr>
+       <tr><td colspan='5'><a href='4.html'>src/skey/test.c</a></td></tr>
+       <tr class="nullPointerRedundantCheck"><td><a href="4.html#line-72">72</a></td><td>nullPointerRedundantCheck</td><td><a href='https://cwe.mitre.org/data/definitions/476.html'>476</a></td><td>warning</td><td >Either the condition &apos;key!=NULL&apos; is redundant or there is possible null pointer dereference: key.</td></tr>
+       <tr><td colspan='5'><a href='5.html'>src/terminal-app.c</a></td></tr>
+       <tr class="variableScope"><td><a href="5.html#line-976">976</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;i&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="5.html#line-978">978</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;charset&apos; can be reduced.</td></tr>
+       <tr><td colspan='5'><a href='6.html'>src/terminal-encoding.c</a></td></tr>
+       <tr class="variableScope"><td><a href="6.html#line-292">292</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;id_string&apos; can be reduced.</td></tr>
+       <tr><td colspan='5'><a href='7.html'>src/terminal-options.c</a></td></tr>
+       <tr class="variableScope"><td><a href="7.html#line-310">310</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;it&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="7.html#line-336">336</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;iw&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="7.html#line-362">362</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;iw&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="7.html#line-394">394</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;iw&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="7.html#line-426">426</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;iw&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="7.html#line-642">642</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;it&apos; can be reduced.</td></tr>
+       <tr><td colspan='5'><a href='8.html'>src/terminal-profile.c</a></td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1289">1289</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;allow-bold&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1290">1290</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;bold-color-same-as-fg&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1291">1291</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;default-show-menubar&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1292">1292</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;login-shell&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1293">1293</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;scroll-background&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1294">1294</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;scrollback-unlimited&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1295">1295</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;scroll-on-keystroke&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1296">1296</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;scroll-on-output&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1297">1297</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;silent-bell&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1298">1298</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;copy-selection&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1299">1299</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;use-custom-command&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1300">1300</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;use-custom-default-size&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1301">1301</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;use-skey&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1302">1302</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;use-urls&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1303">1303</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;use-system-font&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1304">1304</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;use-theme-colors&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1306">1306</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;background-color&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1307">1307</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;bold-color&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1308">1308</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;font&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1309">1309</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;foreground-color&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1312">1312</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;background-darkness&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1314">1314</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;background-type&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1315">1315</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;backspace-binding&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1316">1316</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;cursor-blink-mode&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1317">1317</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;cursor-shape&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1318">1318</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;delete-binding&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1319">1319</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;exit-action&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1320">1320</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;scrollbar-position&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1321">1321</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;title-mode&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1323">1323</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;default-size-columns&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1324">1324</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;default-size-rows&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1325">1325</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;scrollback-lines&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1330">1330</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;background-image&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1331">1331</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;custom-command&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1332">1332</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;title&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1333">1333</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;visible-name&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1334">1334</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;word-chars&quot; to bool always evaluates to true.</td></tr>
+       <tr class="incorrectStringBooleanError"><td><a href="8.html#line-1336">1336</a></td><td>incorrectStringBooleanError</td><td><a href='https://cwe.mitre.org/data/definitions/571.html'>571</a></td><td>warning</td><td >Conversion of string literal &quot;palette&quot; to bool always evaluates to true.</td></tr>
+       <tr><td colspan='5'><a href='9.html'>src/terminal-resources.c</a></td></tr>
+       <tr class="unusedStructMember"><td><a href="9.html#line-10">10</a></td><td>unusedStructMember</td><td><a href='https://cwe.mitre.org/data/definitions/563.html'>563</a></td><td>style</td><td >union member &apos;Anonymous0::alignment&apos; is never used.</td></tr>
+       <tr class="unusedStructMember"><td><a href="9.html#line-10">10</a></td><td>unusedStructMember</td><td><a href='https://cwe.mitre.org/data/definitions/563.html'>563</a></td><td>style</td><td >union member &apos;Anonymous0::ptr&apos; is never used.</td></tr>
+       <tr class="unusedStructMember"><td><a href="9.html#line-839">839</a></td><td>unusedStructMember</td><td><a href='https://cwe.mitre.org/data/definitions/563.html'>563</a></td><td>style</td><td >union member &apos;Anonymous0::alignment&apos; is never used.</td></tr>
+       <tr class="unusedStructMember"><td><a href="9.html#line-839">839</a></td><td>unusedStructMember</td><td><a href='https://cwe.mitre.org/data/definitions/563.html'>563</a></td><td>style</td><td >union member &apos;Anonymous0::ptr&apos; is never used.</td></tr>
+       <tr><td colspan='5'><a href='10.html'>src/terminal-screen.c</a></td></tr>
+       <tr class="variableScope"><td><a href="10.html#line-1082">1082</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;fg_rgba&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="10.html#line-1082">1082</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;bg_rgba&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="10.html#line-1838">1838</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;cwd&apos; can be reduced.</td></tr>
+       <tr><td colspan='5'><a href='11.html'>src/terminal-search-dialog.c</a></td></tr>
+       <tr class="nullPointerRedundantCheck"><td><a href="11.html#line-181">181</a></td><td>nullPointerRedundantCheck</td><td><a href='https://cwe.mitre.org/data/definitions/476.html'>476</a></td><td>warning</td><td >Either the condition &apos;search_string!=NULL&apos; is redundant or there is possible null pointer dereference: search_string.</td></tr>
+       <tr><td colspan='5'><a href='12.html'>src/terminal-tabs-menu.c</a></td></tr>
+       <tr class="unreachableCode"><td><a href="12.html#line-449">449</a></td><td>unreachableCode</td><td><a href='https://cwe.mitre.org/data/definitions/561.html'>561</a></td><td>style</td><td >Statements following return, break, continue, goto or throw will never be executed.</td></tr>
+       <tr class="variableScope"><td><a href="12.html#line-458">458</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;action&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="12.html#line-462">462</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;verb&apos; can be reduced.</td></tr>
+       <tr><td colspan='5'><a href='13.html'>src/terminal-util.c</a></td></tr>
+       <tr class="variableScope"><td><a href="13.html#line-77">77</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;args&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="13.html#line-551">551</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;password&apos; can be reduced.</td></tr>
+       <tr><td colspan='5'><a href='14.html'>src/terminal-window.c</a></td></tr>
+       <tr class="unusedVariable"><td><a href="14.html#line-2366">2366</a></td><td>unusedVariable</td><td><a href='https://cwe.mitre.org/data/definitions/563.html'>563</a></td><td>style</td><td >Unused variable: screen</td></tr>
+       <tr class="variableScope"><td><a href="14.html#line-2941">2941</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;page_num&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="14.html#line-2942">2942</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;before_pages&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="14.html#line-2943">2943</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;later_pages&apos; can be reduced.</td></tr>
+       <tr class="unreadVariable"><td><a href="14.html#line-3597">3597</a></td><td>unreadVariable</td><td><a href='https://cwe.mitre.org/data/definitions/563.html'>563</a></td><td>style</td><td >Variable &apos;do_confirm&apos; is assigned a value that is never used.</td></tr>
+       <tr><td colspan='5'><a href='15.html'>src/terminal.c</a></td></tr>
+       <tr class="nullPointerRedundantCheck"><td><a href="15.html#line-259">259</a></td><td>nullPointerRedundantCheck</td><td><a href='https://cwe.mitre.org/data/definitions/476.html'>476</a></td><td>warning</td><td >Either the condition &apos;introspection_data!=NULL&apos; is redundant or there is possible null pointer dereference: introspection_data.</td></tr>
+       </table>
+      </div>
+      <div id="footer">
+        <p>
+         Cppcheck 1.90 - a tool for static C/C++ code analysis</br>
+         </br>
+         Internet: <a href="http://cppcheck.net">http://cppcheck.net</a></br>
+         IRC: <a href="irc://irc.freenode.net/cppcheck">irc://irc.freenode.net/cppcheck</a></br>
+        </p>
+      </div>
+  </body>
+</html>
